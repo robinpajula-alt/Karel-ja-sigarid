@@ -1,0 +1,128 @@
+import time
+
+def print_aeglaselt(tekst):
+    """Prindib teksti trükimasina efektiga."""
+    for taht in tekst:
+        print(taht, end='', flush=True)
+        time.sleep(0.0001)
+    print()
+
+def tee_valik(kysimus, valikud):
+    """
+    Esitab mängijale küsimuse ja valikud.
+    Tagastab valitud vastuse indeksi (nt 1, 2, 3).
+    """
+    print_aeglaselt("\n" + kysimus)
+    for i, valik in enumerate(valikud, 1):
+        print(f"  {i}. {valik}")
+    
+    while True:
+        try:
+            vastus = int(input("Vali number (1, 2, 3...): "))
+            if 1 <= vastus <= len(valikud):
+                return vastus
+            else:
+                print("Palun vali number antud valikute hulgast.")
+        except ValueError:
+            print("Vigane sisend. Palun sisesta ainult number.")
+
+def alusta_mangu():
+    """Mängu põhiosa."""
+    skoor = 0
+
+    # --- Sissejuhatus (Plokk 1: Teema valik) ---
+    print_aeglaselt("="*30)
+    print_aeglaselt("   OLUKORRA LAHENDAMISE MÄNG   ")
+    print_aeglaselt("="*30)
+    print_aeglaselt("Sinu sõber on hakanud e-sigaretti kasutama ja sa oled mures.")
+    print_aeglaselt("Proovi teha häid otsuseid, et teda aidata.")
+    print_aeglaselt("...")
+    time.sleep(1)
+
+    # --- Stsenaarium ja Analüüs (Plokk 2) ---
+    print_aeglaselt("Sa märkad, et su hea sõber Karel käib tihti nurga taga e-sigaretti tõmbamas.")
+    print_aeglaselt("Alguses ütles ta, et teeb seda 'niisama', aga nüüd teeb seda iga päev.")
+    print_aeglaselt("Vahel on ta väsinud ja ärritunud, kui tal pole e-sigaretti käepärast.")
+    print_aeglaselt("Sa hakkad muretsema ja otsustad temaga rääkida.")
+
+    # Plokk 2: Kuidas ohver tunneb ennast?
+    vastus1 = tee_valik(
+        "Mis sa arvad, kuidas Karel ennast praegu tunneb? (Plokk 2: Ohvri enesetunne)",
+        [
+            "Tal on lihtsalt igav ja ta tahab proovida uusi asju.",
+            "Ta võib olla sõltuvuses ja tunneb, et ei saa enam ilma olla.",
+            "Ta teeb seda, et teised teda lahedaks peaksid."
+        ]
+    )
+    if vastus1 == 2:
+        print_aeglaselt("-> Õige. Tundub, et ta on juba natuke sõltuv sellest ja tal on raske lõpetada.")
+        skoor += 1
+    else:
+        print_aeglaselt("-> Võib-olla on ka muud põhjused, aga tundub, et ta ei kontrolli enam oma harjumust hästi.")
+
+    # Plokk 2: Kuidas reageerida?
+    vastus2 = tee_valik(
+        "Karel ütleb sulle, et ta proovib küll vähem tõmmata, aga ei suuda. Mida sa teed? (Plokk 2: Kuidas reageerida?)",
+        [
+            "Naerad tema üle.",
+            "Kuulad teda ja soovitad kellegagi rääkida, näiteks vanemaga või kooli psühholoogiga.",
+            "Ütled talle, et see pole midagi hullu ja, et kõik ju teevad seda."
+        ]
+    )
+    if vastus2 == 2:
+        print_aeglaselt("-> Väga hea! On tähtis kuulata ja soovitada abi, mitte naerda või maha teha.")
+        skoor += 1
+    else:
+        print_aeglaselt("-> Kui sa teed nalja või ütled, et see on normaalne, võib see hullemaks muutuda.")
+
+    # --- Lahendusplaan (Plokk 3) ---
+    print_aeglaselt("\nNüüd tuleb koostada lahendusplaan (Plokk 3)...")
+    
+    # Plokk 3: Kellega võtta ühendust?
+    vastus3 = tee_valik(
+        "Keda te peaksite olukorrast teavitama? (Plokk 3: Abisaamise sammud)",
+        [
+            "Rääkida vanemaga või kooli psühholoogiga.",
+            "Räägid oma lemmikloomale olukorrast ja loodad, et ta lahendab selle ära.",
+            "Tema noorema vennaga."
+        ]
+    )
+    if vastus3 == 1:
+        print_aeglaselt("-> Suurepärane! Täiskasvanu saab aidata ja anda nõu, mida edasi teha..")
+        skoor += 3 # See on parim vastus
+    else:
+        print_aeglaselt("-> Lemmikloomast küll abi ei saa ja kuigi vend võib natukene aidata, ei ole see alati kõige parem võimalus.")
+        skoor += 1
+
+    # Plokk 3: Tuleviku ennetamine
+    vastus4 = tee_valik(
+        "Kuidas saaks Karel tulevikus hoiduda e-sigareti kasutamisest? (Plokk 3: Tuleviku ennetamine)",
+        [
+            "Tuleviku peale pole vaja mõeldagi",
+            "Soovitad tal teha muid asju kui tal tekib tunne tõmmata, näiteks minna jalutama või midagi muud füüsilist teha.",
+            "Osta talle narkootikume, siis ta ei taha e-sigarette."
+        ]
+    )
+    if vastus4 == 2:
+        print_aeglaselt("-> Väga hea! Midagi muud tehes läheb tähelepanu mujale ja isu võib väheneda.")
+        skoor += 2
+    else:
+        print_aeglaselt("-> Ikka on vaja tuleviku peale mõelda ja narkootikumide ostmine ei ole üldse hea idee, sest siis ta jääb veel hullemasse sõltuvusse veel halvema asjaga.")
+    # --- Tulemuste esitlus (Plokk 4) ---
+    print_aeglaselt("\n" + "="*30)
+    print_aeglaselt("   TULEMUSTE ANALÜÜS (Plokk 4)   ")
+    print_aeglaselt("="*30)
+    print_aeglaselt(f"Sinu lahendusplaani skoor: {skoor} / 7")
+
+    if skoor >= 6:
+        print_aeglaselt("Väga hästi! Oled hooliv ja mõistlik sõber, kes oskab aidata.")
+    elif skoor >= 4:
+        print_aeglaselt("Hästi tehtud! Sul on head mõtted, aga mõni otsus saaks olla parem ")
+    else:
+         print_aeglaselt("Proovisid küll, aga vastused oleks võinud olla paremad.")
+         print_aeglaselt("Sõpra tuleb kuulata ja vajadusel tuleb abi otsida.")
+    print_aeglaselt("\nMäng lõppes.")
+
+# Käivitame mängu
+if __name__ == "__main__":
+    alusta_mangu()
