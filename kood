@@ -4,7 +4,7 @@ def print_aeglaselt(tekst):
     """Prindib teksti trükimasina efektiga."""
     for taht in tekst:
         print(taht, end='', flush=True)
-        time.sleep(0.0001)
+        time.sleep(0.03)
     print()
 
 def tee_valik(kysimus, valikud):
